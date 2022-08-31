@@ -1,0 +1,136 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.jgc.CucumberHiltComposePOC"
+        minSdk 26
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testApplicationId "com.jgc.CucumberHiltComposePOC.steps"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner "com.jgc.CucumberHiltComposePOC.runner.CucumberTestRunner"
+        testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
+        testInstrumentationRunnerArguments = [
+                clearPackageData           : 'true',
+                waitForActivitiesToComplete: 'false' // Mitigation for JUnit rule issue
+//                cucumberUseAndroidJUnitRunner: 'true' // Uncomment to run normal Android tests
+        ]
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+        animationsDisabled true
+    }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+//    // ---------------- TESTS -----------------
+//    // Espresso idle resources
+//    implementation "androidx.test.espresso:espresso-idling-resource:$espresso"
+//    // Hilt
+//    testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+//    kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+//    // Hilt instrumented tests
+//    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+//    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+//    // Compose
+//    implementation 'androidx.compose.ui:ui-test:1.2.1'
+//    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+//    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+//    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    // Fragment
+//    debugImplementation "androidx.fragment:fragment-testing:1.5.2"
+//    androidTestImplementation "android.arch.core:core-testing:1.1.1"
+    // Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+    testImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    //    -------------  END TESTS -----------
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.0.0-beta01'
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.activity:activity-compose:1.5.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    androidTestImplementation "io.cucumber:cucumber-android:4.9.0"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    // Jetpack Compose Integration
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    // hilt annotation processor
+    androidTestAnnotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
+//
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    androidTestImplementation 'androidx.test:runner:1.3.0'
+//    androidTestImplementation 'androidx.test:rules:1.3.0'
+}
