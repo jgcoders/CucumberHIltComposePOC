@@ -10,9 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import com.jgc.CucumberHiltComposePOC.R
 
 
@@ -31,7 +29,7 @@ fun FirstFragmentContent(navController: NavController) {
         Button(
             modifier = Modifier.testTag("navigateToSecondFragmentButton"),
             onClick = {
-                navController.navigate(R.id.secondFragment)
+                navController.navigate(R.id.secondFragment/*action_firstFragment_to_secondFragment*/)
             },
             content = {
                 Text("Navigate to second fragment")

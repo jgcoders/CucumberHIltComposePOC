@@ -18,7 +18,7 @@ class FirstFragment : Fragment() {
     ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                FirstFragmentContent(/*findNavController()*/)
+                FirstFragmentContent(findNavController())
             }
         }
     }
