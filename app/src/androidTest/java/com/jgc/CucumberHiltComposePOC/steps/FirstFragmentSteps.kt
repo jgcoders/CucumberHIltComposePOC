@@ -7,14 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.testing.TestNavHostController
-import androidx.test.core.app.ApplicationProvider
+import androidx.navigation.Navigation.findNavController
+import com.jgc.CucumberHiltComposePOC.MainActivity
 import com.jgc.CucumberHiltComposePOC.R
-import com.jgc.CucumberHiltComposePOC.ui.first.FirstFragmentContent
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import io.cucumber.junit.WithJunitRule
@@ -24,20 +22,13 @@ import org.junit.Rule
 class FirstFragmentSteps {
 
     @get:Rule
-    val composeRule = createComposeRule()
+    val composeRule = createAndroidComposeRule<MainActivity>()
 
     @When("^launch first fragment screen$")
     fun launchFirstFragmentScreen() {
-        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
-        // Create a graphical FragmentScenario for the TitleScreen
-        /*launchFragmentInHiltContainer<FirstFragment>() {
-            // Set the graph on the TestNavHostController
-            Navigation.setViewNavController(this.requireView(), navController)
-
-        }*/
-        composeRule.setContentWithinTheme {
-            navController.setGraph(R.navigation.nav_graph)
-            FirstFragmentContent(navController = navController)
+        composeRule.activityRule.scenario.onActivity {
+            findNavController(it, R.id.nav_host_fragment)
+                .navigate(R.id.firstFragment)
         }
     }
 
@@ -54,6 +45,13 @@ class FirstFragmentSteps {
         with(composeRule) {
             waitForIdle()
             onNodeWithTag("navigateToSecondFragmentButton").performClick()
+        }
+    }
+
+    @Then("^second fragment text should be visible$")
+    fun thenSecondFragmentTextShouldBeVisible() {
+        with(composeRule) {
+            waitForIdle()
             onNodeWithTag("secondFragmentText").assertIsDisplayed()
         }
     }

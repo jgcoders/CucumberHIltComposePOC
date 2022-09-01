@@ -4,3 +4,4 @@ Feature: First fragment screen
     When launch first fragment screen
     Then first fragment text is displayed
     Then click navigate to second fragment button
+    Then second fragment text should be visible
