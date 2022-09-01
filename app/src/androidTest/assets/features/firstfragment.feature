@@ -5,3 +5,5 @@ Feature: First fragment screen
     Then first fragment text is displayed
     Then click navigate to second fragment button
     Then second fragment text should be visible
+    Then navigating back
+    Then first fragment text is displayed

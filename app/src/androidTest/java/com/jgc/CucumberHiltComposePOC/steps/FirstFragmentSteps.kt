@@ -1,16 +1,11 @@
 package com.jgc.CucumberHiltComposePOC.steps
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.navigation.Navigation.findNavController
+import androidx.test.espresso.Espresso
 import com.jgc.CucumberHiltComposePOC.MainActivity
 import com.jgc.CucumberHiltComposePOC.R
 import io.cucumber.java.en.Then
@@ -55,17 +50,9 @@ class FirstFragmentSteps {
             onNodeWithTag("secondFragmentText").assertIsDisplayed()
         }
     }
-}
 
-fun ComposeContentTestRule.setContentWithinTheme(content: @Composable () -> Unit) {
-    setContent {
-        MaterialTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colors.background
-            ) {
-                content()
-            }
-        }
+    @Then("^navigating back$")
+    fun thenNavigatingBack() {
+        Espresso.pressBack()
     }
 }
