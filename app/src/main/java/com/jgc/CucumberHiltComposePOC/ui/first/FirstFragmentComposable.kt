@@ -15,7 +15,7 @@ import com.jgc.CucumberHiltComposePOC.R
 
 
 @Composable
-fun FirstFragmentContent(navController: NavController) {
+fun FirstFragmentContent(number: Float, navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -23,6 +23,11 @@ fun FirstFragmentContent(navController: NavController) {
     ) {
         Text(
             text = "First fragment",
+            modifier = Modifier.testTag("firstFragmentText")
+        )
+        Spacer(modifier = Modifier)
+        Text(
+            text = "Number: $number",
             modifier = Modifier.testTag("firstFragmentText")
         )
         Spacer(modifier = Modifier)

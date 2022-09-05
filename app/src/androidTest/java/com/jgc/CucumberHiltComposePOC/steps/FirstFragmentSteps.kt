@@ -8,16 +8,28 @@ import androidx.navigation.Navigation.findNavController
 import androidx.test.espresso.Espresso
 import com.jgc.CucumberHiltComposePOC.MainActivity
 import com.jgc.CucumberHiltComposePOC.R
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import io.cucumber.java.Before
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import io.cucumber.junit.WithJunitRule
 import org.junit.Rule
 
 @WithJunitRule
+@HiltAndroidTest
 class FirstFragmentSteps {
 
-    @get:Rule
+    @get: Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
     val composeRule = createAndroidComposeRule<MainActivity>()
+
+    @Before
+    fun setup() {
+        hiltRule.inject()
+    }
 
     @When("^launch first fragment screen$")
     fun launchFirstFragmentScreen() {
