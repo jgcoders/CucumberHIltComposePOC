@@ -20,15 +20,15 @@ import org.junit.Rule
 @HiltAndroidTest
 class FirstFragmentSteps {
 
-    @get: Rule(order = 0)
-    val hiltRule = HiltAndroidRule(this)
+//    @get: Rule(order = 0)
+//    val hiltRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     @Before
     fun setup() {
-        hiltRule.inject()
+//        hiltRule.inject()
     }
 
     @When("^launch first fragment screen$")
