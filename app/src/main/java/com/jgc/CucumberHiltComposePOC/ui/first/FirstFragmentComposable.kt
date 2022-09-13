@@ -28,7 +28,6 @@ fun FirstFragmentContent(number: Float, navController: NavController) {
         Spacer(modifier = Modifier)
         Text(
             text = "Number: $number",
-            modifier = Modifier.testTag("firstFragmentText")
         )
         Spacer(modifier = Modifier)
         Button(
